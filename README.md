@@ -21,4 +21,6 @@ The calculator uses audience × monthly join rate × payer rate × USD spend per
 
 ## Assets
 
-Original Moxy white wordmark supplied by the user, preserved with Los Angeles / Miami lettering. AI is composed alongside it in CSS. The hero is an AI-generated fictional adult editorial portrait, not a representation of an existing Moxy creator or testimonial. Satoshi is loaded from Fontshare with a system sans-serif fallback. Demo conversations are scripted and labelled.
+Logo: supplied Moxy AI SVG from the developer pack, used intact with teal AI and city lettering. The hero is an AI-generated fictional adult creator holding a phone, not an existing Moxy creator or testimonial. The entire image is contained so the head and phone remain visible. Satoshi is loaded from Fontshare with a system sans-serif fallback. Demo conversations are scripted and labelled.
+
+Visual direction: centered hero, compact creator and interactive conversation composition, diffuse white glows on black, translucent surfaces, white pill actions. Em dashes are excluded from site copy.

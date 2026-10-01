@@ -5,7 +5,7 @@ menuButton?.addEventListener('click',()=>{const open=menuButton.getAttribute('ar
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu&&!menu.hidden){menu.hidden=true;menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Open navigation');menuButton.focus();}});
 const features={
 chat:{title:'Built around<br>how you speak.',body:'Your personality is the starting point. Your AI uses your conversational style to chat with fans on Telegram, even when you’re offline.',messages:[['outgoing','Finally finished that workout 😅'],['incoming','Okay, I see you! Was it the leg session you were putting off?'],['outgoing','You remembered 😂'],['incoming','Of course. So… stairs tomorrow might be interesting.']]},
-remember:{title:'Pick up where<br>you left off.',body:'Your AI can remember details from previous conversations. A favourite song, a big day, an inside joke—little things that make the next conversation feel more personal.',messages:[['incoming','Hey, how did your first day at the new job go?'],['outgoing','You remembered! Really good actually.'],['incoming','I knew you’d settle in. Did you find a coffee spot nearby yet?'],['outgoing','Priorities 😂 working on it.']]},
+remember:{title:'Pick up where<br>you left off.',body:'Your AI can remember details from previous conversations. A favourite song, a big day, an inside joke. Little things that make the next conversation feel more personal.',messages:[['incoming','Hey, how did your first day at the new job go?'],['outgoing','You remembered! Really good actually.'],['incoming','I knew you’d settle in. Did you find a coffee spot nearby yet?'],['outgoing','Priorities 😂 working on it.']]},
 earn:{title:'Your content.<br>More possibility.',body:'Give the content you choose another place to sell. Paid messages, content and tips create new ways for fans to support you through the conversation.',messages:[['outgoing','Loved the behind-the-scenes shoot!'],['incoming','That was such a fun day. I have a few more from that set.'],['incoming','Exclusive photo set · US$10\nExample content offer'],['outgoing','Would love to see those.']]}
 };
 const tabs=[...document.querySelectorAll('[data-feature]')];
@@ -18,3 +18,15 @@ if(document.querySelector('.calculator')){for(const id of['audience','join','pay
 const inviteForm=document.querySelector('#invite-form');
 inviteForm?.addEventListener('submit',event=>{event.preventDefault();const input=document.querySelector('#invite-code');const error=document.querySelector('#invite-error');let code=input.value.trim();if(/^https?:/i.test(code)){try{const link=new URL(code);if(link.protocol!=='https:'||link.hostname!=='dashboard.tgaiclone.xyz'||link.pathname!=='/creator/signup')throw new Error();code=link.searchParams.get('code')||'';}catch{error.textContent='Please use the creator signup invitation sent by Moxy, or paste just your invitation code.';error.hidden=false;input.setAttribute('aria-invalid','true');return;}}if(!/^[a-zA-Z0-9_-]{6,256}$/.test(code)){error.textContent='Enter the complete invitation code or signup link sent by Moxy.';error.hidden=false;input.setAttribute('aria-invalid','true');return;}error.hidden=true;input.removeAttribute('aria-invalid');window.location.assign('https://dashboard.tgaiclone.xyz/creator/signup?code='+encodeURIComponent(code));});
 document.querySelector('#invite-code')?.addEventListener('input',event=>{document.querySelector('#invite-error').hidden=true;event.target.removeAttribute('aria-invalid');});
+
+const homeDemos={
+chat:[['fan','Do you remember my big day tomorrow?'],['ai','Your first day at the new job 🤍 How are you feeling?']],
+memory:[['fan','You remembered my favourite song?'],['ai','Of course. The one you had on repeat after our last chat.']],
+content:[['fan','Got any more from that shoot?'],['ai','A few favourites you haven’t seen yet. Exclusive photo set · US$10.']]
+};
+const homeDemoButtons=[...document.querySelectorAll('[data-home-demo]')];
+homeDemoButtons.forEach(button=>button.addEventListener('click',()=>{
+const panel=document.querySelector('#home-demo-messages');panel.replaceChildren();
+for(const[type,content]of homeDemos[button.dataset.homeDemo]){const item=document.createElement('p');item.className='home-bubble home-'+type;item.textContent=content;panel.append(item);}
+homeDemoButtons.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+}));
